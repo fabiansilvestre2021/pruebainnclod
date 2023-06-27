@@ -9,6 +9,8 @@ class Documento extends Model
 {
     use HasFactory;
     public $table = "DOC_DOCUMENTO";
+    
+    protected $primaryKey = 'DOC_ID';
 
     protected $fillable = ['DOC_NOMBRE','DOC_CODIGO','DOC_CONTENIDO','DOC_ID_TIPO','DOC_ID_PROCESO'];
 }

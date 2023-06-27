@@ -64,11 +64,11 @@ class DocumentoController extends Controller
     public function update(Request $request, string $id)
     {
         $document = Documento::findOrFail($request->id);
-        $document->$DOC_NOMBRE = $request->$DOC_NOMBRE;
+        $document->DOC_NOMBRE = $request->DOC_NOMBRE;
         // $document->$DOC_CODIGO = $request->$DOC_;
-        $document->$DOC_CONTENIDO = $request->$DOC_CONTENIDO;
-        $document->$DOC_ID_TIPO = $request->$DOC_ID_TIPO;
-        $document->$DOC_ID_PROCESO = $request->$DOC_ID_PROCESO;
+        $document->DOC_CONTENIDO = $request->DOC_CONTENIDO;
+        $document->DOC_ID_TIPO = $request->DOC_ID_TIPO;
+        $document->DOC_ID_PROCESO = $request->DOC_ID_PROCESO;
 
         $document->save();
     }

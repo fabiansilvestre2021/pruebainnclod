@@ -20,7 +20,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('/doc_documento', 'App\Http\Controllers\DocumentoController@index');
 Route::post('/doc_documento', 'App\Http\Controllers\DocumentoController@store');
-Route::put('/doc_documento/{id}', 'App\Http\Controllers\DocumentoController@update');
+Route::post('/doc_documento/{id}', 'App\Http\Controllers\DocumentoController@update');
 Route::delete('/doc_documento/{id}', 'App\Http\Controllers\DocumentoController@destroy');
 
 
@@ -29,3 +29,5 @@ Route::post('/tip_documento', 'App\Http\Controllers\TipDocController@store');
 
 Route::get('/pro_proceso', 'App\Http\Controllers\ProcesoController@index');
 Route::post('/pro_proceso', 'App\Http\Controllers\ProcesoController@store');
+
+Route::get('/tabla', 'UserController@index');
