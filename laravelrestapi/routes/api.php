@@ -30,4 +30,4 @@ Route::post('/tip_documento', 'App\Http\Controllers\TipDocController@store');
 Route::get('/pro_proceso', 'App\Http\Controllers\ProcesoController@index');
 Route::post('/pro_proceso', 'App\Http\Controllers\ProcesoController@store');
 
-Route::get('/tabla', 'UserController@index');
+Route::post('/login', 'App\Http\Controllers\UserController@index');

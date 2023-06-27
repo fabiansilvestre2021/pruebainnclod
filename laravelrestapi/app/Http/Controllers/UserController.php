@@ -3,15 +3,35 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+
 
 class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $request->password = Hash::make($request->password);
+        $credentials = $request->only('email', 'password');
+        
+
+    // Validar las credenciales del usuario
+    if (Auth::attempt($credentials)) {
+        // Las credenciales son válidas
+
+        // Obtener el usuario autenticado
+        $user = Auth::user();
+
+        // Devolver los detalles del usuario como respuesta JSON
+        return response()->json($user);
+    } else {
+        // Las credenciales son inválidas
+        return response()->json(['error' => 'Credenciales inválidas'], 401);
+    }
     }
 
     /**
@@ -33,9 +53,9 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show()
     {
-        //
+     //  
     }
 
     /**

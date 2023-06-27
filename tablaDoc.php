@@ -36,7 +36,10 @@
                     echo "<td>".$documento['updated_at']."</td>";
                     echo "<td>";
                     echo "<button type='button' class='btn btn-primary' data-toggle='modal' data-target='#editarModal".$documento['DOC_ID']."'>Editar</button>";
-                    echo "<a href='http://localhost:8000/api/doc_documento/".$documento['DOC_ID']."' class='btn btn-danger'>Eliminar</a>";
+                    echo "<form action='http://localhost:8000/api/doc_documento/".$documento['DOC_ID']."' method='POST'>";
+                    echo "<input type='hidden' name='_method' value='DELETE'>"; // Agrega un campo oculto para indicar el método DELETE
+                    echo "<button type='submit' class='btn btn-danger'>Eliminar</button>";
+                    echo "</form>";
                     echo "</td>";
                     echo "</tr>";
                     
@@ -56,7 +59,7 @@
                     echo "<label for='doc_nombre'>Nombre:</label>";
                     echo "<input type='text' name='DOC_NOMBRE' id='DOC_NOMBRE' value='".$documento['DOC_NOMBRE']."' required><br>";
                     echo "<label for='doc_codigo'>Código:</label>";
-                    echo "<input type='text' name='DOC_CODIGO' id='DOC_CODIGO' value='".$documento['DOC_CODIGO']."' required><br>";
+                    // echo "<input type='text' name='DOC_CODIGO' id='DOC_CODIGO' value='".$documento['DOC_CODIGO']."' required><br>";
                     echo "<label for='doc_contenido'>Contenido:</label>";
                     echo "<textarea name='DOC_CONTENIDO' id='DOC_CONTENIDO' required>".$documento['DOC_CONTENIDO']."</textarea><br>";
 
