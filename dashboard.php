@@ -13,7 +13,7 @@
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Se obtienen los datos del formulario
             $docNombre = $_POST['docNombre'];
-            $docCodigo = $_POST['tipPrefijo'] . "-" . $_POST['ProPrefijo']."-".rand(1, 1000);
+            $docCodigo = $_POST['TipoPrefijo'] . "-" . $_POST['ProPrefijo']."-".rand(1, 1000);
             $docContenido = $_POST['docContenido'];
             $docIDTipo = $_POST['docIDTipo'];
             $docIDProceso = $_POST['docIDProceso'];
@@ -53,17 +53,13 @@
                 <input type="text" class="form-control" id="docNombre" name="docNombre" required>
             </div>
             <div class="form-group">
-                <label for="docCodigo">DOC_CODIGO:</label>
-                <input type="text" class="form-control" id="docCodigo" name="docCodigo" required>
-            </div>
-            <div class="form-group">
                 <label for="docContenido">DOC_CONTENIDO:</label>
                 <textarea class="form-control" id="docContenido" name="docContenido" rows="5" required></textarea>
             </div>
 
             <div class="form-group">
                 <label for="docIDTipo">Tipo de Documento:</label>
-                <select class="form-control" id="docIDTipo" name="docIDTipo" required>
+                <select class="form-control" id="docIDTipo" name="docIDTipo" onchange="document.getElementById('TipoPrefijo').value=this.options[this.options.selectedIndex].id;" required>
                     <?php
                     // Obtenemos los dtaos requeridos  del API
                     $url = 'http://localhost:8000/api/tip_documento';
@@ -75,23 +71,20 @@
                         $tipID = $tipo['TIP_ID'];
                         $tipNombre = $tipo['TIP_NOMBRE'];
                         $tipPrefijo = $tipo['TIP_PREFIJO'];
-                        "<input name='cajero' type='hidden' value='$tipPrefijo'>";
-                        echo "<option value='$tipID'>$tipNombre</option>";
+                        echo "<option value='$tipID' id='$tipPrefijo'>$tipNombre</option>";
                     }
                     
                     ?>
                 </select>
-                <?php
-                // Generamos un campo oculto para el prefijo del tipo de documento despues de ser seleccionado
-                if (isset($tipPrefijo)) {
-                    echo "<input type='hidden' name='tipPrefijo' id='tipPrefijo' value='$tipPrefijo'>";
-                }
-                ?>
+                <input type="hidden" id="TipoPrefijo" name="TipoPrefijo" value="TipoPrefijo" />
+
             </div>
 
             <div class="form-group">
                 <label for="docIDProceso">Proceso:</label>
-                <select class="form-control" id="docIDProceso" name="docIDProceso" required>
+
+                <select class="form-control" id="docIDProceso" name="docIDProceso" onchange="document.getElementById('Proprefijo').value=this.options[this.options.selectedIndex].id;"
+ required>
                     <?php
                     // Obtener los datos del API
                     $urlp = 'http://localhost:8000/api/pro_proceso';
@@ -103,11 +96,12 @@
                         $ProId = $Pro['PRO_ID'];
                         $ProNombre = $Pro['PRO_NOMBRE'];
                         $ProPrefijo = $Pro['PRO_PREFIJO'];
-                        "<input name='cajero' type='hidden' value='$ProPrefijo'>";
-                        echo "<option value='$ProId'>$ProNombre</option>";
+                        echo "<option value='$ProId' id='$ProPrefijo'>$ProNombre</option>";
                     }
                     ?>
                 </select>
+                <input type="hidden" id="Proprefijo" name="Proprefijo" value="Proprefijo" />
+
                 <?php
                 // Generamos un  campo oculto para el prefijo del proceso despues de ser seleccionado 
                 if (isset($ProPrefijo)) {
@@ -122,5 +116,9 @@
         </form>
     </div>
 
+    <script>
+
+
+    </script>
 </body>
 </html>
